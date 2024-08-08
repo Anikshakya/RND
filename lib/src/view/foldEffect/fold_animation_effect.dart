@@ -12,8 +12,7 @@ class FoldingCompartment extends StatefulWidget {
   const FoldingCompartment({super.key, this.duration, required this.entries, this.isOpen = false, this.onClick});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _FoldingCompartmentState createState() => _FoldingCompartmentState();
+  State<FoldingCompartment> createState() => _FoldingCompartmentState();
 }
 
 class _FoldingCompartmentState extends State<FoldingCompartment> with SingleTickerProviderStateMixin {

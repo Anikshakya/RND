@@ -8,8 +8,7 @@ class FoldListPage extends StatefulWidget {
   const FoldListPage({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _FoldListPageState createState() => _FoldListPageState();
+  State<FoldListPage> createState() => _FoldListPageState();
 }
 
 class _FoldListPageState extends State<FoldListPage> {
@@ -30,7 +29,7 @@ class _FoldListPageState extends State<FoldListPage> {
             itemCount: 4,
             itemBuilder: (BuildContext context, int index) {
               return FoldTile(
-                onClick: () => _handleClickedTicket(index),
+                onClick: () => _handleClickedFoldable(index),
               );
             },
           ),
@@ -39,14 +38,14 @@ class _FoldListPageState extends State<FoldListPage> {
     );
   }
 
-  bool _handleClickedTicket(int clickedTicket) {
+  bool _handleClickedFoldable(int clickedFoldIndex) {
     // Scroll to ticket position
     // Add or remove the item of the list of open tickets
-    _openTickets.contains(clickedTicket) ? _openTickets.remove(clickedTicket) : _openTickets.add(clickedTicket);
+    _openTickets.contains(clickedFoldIndex) ? _openTickets.remove(clickedFoldIndex) : _openTickets.add(clickedFoldIndex);
 
     // Calculate heights of the open and closed elements before the clicked item
-    double openTicketsOffset = FoldTile.nominalOpenHeight * _getOpenTicketsBefore(clickedTicket);
-    double closedTicketsOffset = FoldTile.nominalClosedHeight * (clickedTicket - _getOpenTicketsBefore(clickedTicket));
+    double openTicketsOffset = FoldTile.nominalOpenHeight * _getOpenTicketsBefore(clickedFoldIndex);
+    double closedTicketsOffset = FoldTile.nominalClosedHeight * (clickedFoldIndex - _getOpenTicketsBefore(clickedFoldIndex));
 
     double offset = openTicketsOffset + closedTicketsOffset - (FoldTile.nominalClosedHeight * 1.6);
 
@@ -57,8 +56,8 @@ class _FoldListPageState extends State<FoldListPage> {
     return true;
   }
 
-  _getOpenTicketsBefore(int ticketIndex) {
+  _getOpenTicketsBefore(int foldableIndex) {
     // Search all indexes that are smaller to the current index in the list of indexes of open tickets
-    return _openTickets.where((int index) => index < ticketIndex).length;
+    return _openTickets.where((int index) => index < foldableIndex).length;
   }
 }

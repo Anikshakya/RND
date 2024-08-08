@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:rnd/src/view/foldEffect/fold_animation_effect.dart';
 
-
-
 class FoldTile extends StatefulWidget {
   static const double nominalOpenHeight = 400;
   static const double nominalClosedHeight = 160;
   final VoidCallback? onClick;
 
   const FoldTile({super.key, required this.onClick});
+
   @override
   State<StatefulWidget> createState() => _FoldTileState();
 }
