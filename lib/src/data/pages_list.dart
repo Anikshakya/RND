@@ -12,6 +12,10 @@ var pageList = [
     "page"   : const FoldListPage()
   },
   {
+    "title" : "Slider With Effects",
+    "page"   : const FoldListPage()
+  },
+  {
     "title" : "Instagram Zoom Effect",
     "page"   : const ZoomImage()
   },
