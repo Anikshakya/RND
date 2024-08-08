@@ -48,11 +48,11 @@ class _TicketListPageState extends State<TicketListPage> {
     double openTicketsOffset = Ticket.nominalOpenHeight * _getOpenTicketsBefore(clickedTicket);
     double closedTicketsOffset = Ticket.nominalClosedHeight * (clickedTicket - _getOpenTicketsBefore(clickedTicket));
 
-    double offset = openTicketsOffset + closedTicketsOffset - (Ticket.nominalClosedHeight * .5);
+    double offset = openTicketsOffset + closedTicketsOffset - (Ticket.nominalClosedHeight * 1.9);
 
     // Scroll to the clicked element
     _scrollController.animateTo(max(0, offset),
-        duration: const Duration(seconds: 1), curve: const Interval(.15, 1, curve: Curves.easeOutQuad));
+        duration: const Duration(seconds: 1), curve: const Interval(.25, 1, curve: Curves.easeOutQuad));
     // Return true to stop the notification propagation
     return true;
   }
