@@ -1,5 +1,5 @@
 import 'package:rnd/src/view/biometric/biometric_page.dart';
-import 'package:rnd/src/view/unFoldToExpand/onlyfoldatble/ticket_list_page.dart';
+import 'package:rnd/src/view/foldEffect/ticket_list_page.dart';
 import 'package:rnd/src/view/zoom_image/zoom_image.dart';
 
 var pageList = [
@@ -9,7 +9,7 @@ var pageList = [
   },
   {
     "title" : "Fold Effects",
-    "page"   : const TicketListPage()
+    "page"   : const FoldListPage()
   },
   {
     "title" : "Instagram Zoom Effect",

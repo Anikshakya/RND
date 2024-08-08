@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rnd/src/view/unFoldToExpand/onlyfoldatble/fold.dart';
+import 'package:rnd/src/view/foldEffect/fold_animation_effect.dart';
 
 
 

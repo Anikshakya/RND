@@ -2,17 +2,17 @@
 
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:rnd/src/view/unFoldToExpand/onlyfoldatble/ticket_tile.dart';
+import 'package:rnd/src/view/foldEffect/fold_tile.dart';
 
-class TicketListPage extends StatefulWidget {
-  const TicketListPage({super.key});
+class FoldListPage extends StatefulWidget {
+  const FoldListPage({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
-  _TicketListPageState createState() => _TicketListPageState();
+  _FoldListPageState createState() => _FoldListPageState();
 }
 
-class _TicketListPageState extends State<TicketListPage> {
+class _FoldListPageState extends State<FoldListPage> {
 
   final ScrollController _scrollController = ScrollController();
 
@@ -21,6 +21,7 @@ class _TicketListPageState extends State<TicketListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Flex(direction: Axis.vertical, children: <Widget>[
         Expanded(
           child: ListView.builder(
