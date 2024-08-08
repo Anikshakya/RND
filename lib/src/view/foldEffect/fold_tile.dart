@@ -3,17 +3,17 @@ import 'package:rnd/src/view/foldEffect/fold_animation_effect.dart';
 
 
 
-class TicketTile extends StatefulWidget {
+class FoldTile extends StatefulWidget {
   static const double nominalOpenHeight = 400;
   static const double nominalClosedHeight = 160;
   final VoidCallback? onClick;
 
-  const TicketTile({super.key, required this.onClick});
+  const FoldTile({super.key, required this.onClick});
   @override
-  State<StatefulWidget> createState() => _TicketTileState();
+  State<StatefulWidget> createState() => _FoldTileState();
 }
 
-class _TicketTileState extends State<TicketTile> {
+class _FoldTileState extends State<FoldTile> {
   bool _isOpen = false;
   var openTop = Container(width: double.infinity, color: const Color.fromARGB(255, 203, 226, 245), child : const Center(child: Text("TOP", style: TextStyle(fontSize: 30, fontWeight: FontWeight.w300))));
   var openMid = Container(width: double.infinity, color: const Color.fromARGB(255, 235, 183, 179), child : const Center(child: Text("MIDDLE", style: TextStyle(fontSize: 30, fontWeight: FontWeight.w300))));

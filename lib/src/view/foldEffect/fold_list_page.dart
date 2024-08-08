@@ -29,7 +29,7 @@ class _FoldListPageState extends State<FoldListPage> {
             physics: const BouncingScrollPhysics(),
             itemCount: 4,
             itemBuilder: (BuildContext context, int index) {
-              return TicketTile(
+              return FoldTile(
                 onClick: () => _handleClickedTicket(index),
               );
             },
@@ -45,10 +45,10 @@ class _FoldListPageState extends State<FoldListPage> {
     _openTickets.contains(clickedTicket) ? _openTickets.remove(clickedTicket) : _openTickets.add(clickedTicket);
 
     // Calculate heights of the open and closed elements before the clicked item
-    double openTicketsOffset = TicketTile.nominalOpenHeight * _getOpenTicketsBefore(clickedTicket);
-    double closedTicketsOffset = TicketTile.nominalClosedHeight * (clickedTicket - _getOpenTicketsBefore(clickedTicket));
+    double openTicketsOffset = FoldTile.nominalOpenHeight * _getOpenTicketsBefore(clickedTicket);
+    double closedTicketsOffset = FoldTile.nominalClosedHeight * (clickedTicket - _getOpenTicketsBefore(clickedTicket));
 
-    double offset = openTicketsOffset + closedTicketsOffset - (TicketTile.nominalClosedHeight * 1.9);
+    double offset = openTicketsOffset + closedTicketsOffset - (FoldTile.nominalClosedHeight * 1.6);
 
     // Scroll to the clicked element
     _scrollController.animateTo(max(0, offset),
