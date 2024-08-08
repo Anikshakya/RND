@@ -4,6 +4,8 @@ import 'package:rnd/src/view/unFoldToExpand/onlyfoldatble/fold.dart';
 
 
 class TicketTile extends StatefulWidget {
+  static const double nominalOpenHeight = 400;
+  static const double nominalClosedHeight = 160;
   final VoidCallback? onClick;
 
   const TicketTile({super.key, required this.onClick});
@@ -13,9 +15,9 @@ class TicketTile extends StatefulWidget {
 
 class _TicketTileState extends State<TicketTile> {
   bool _isOpen = false;
-  var openTop = Container(width: double.infinity, color: const Color.fromARGB(255, 203, 226, 245), child : const Center(child: Text("FRONT BACK", style: TextStyle(fontSize: 30, fontWeight: FontWeight.w300))));
+  var openTop = Container(width: double.infinity, color: const Color.fromARGB(255, 203, 226, 245), child : const Center(child: Text("TOP", style: TextStyle(fontSize: 30, fontWeight: FontWeight.w300))));
   var openMid = Container(width: double.infinity, color: const Color.fromARGB(255, 235, 183, 179), child : const Center(child: Text("MIDDLE", style: TextStyle(fontSize: 30, fontWeight: FontWeight.w300))));
-  var initialMid = Container(width: double.infinity, color: const Color.fromARGB(255, 233, 182, 241), child : const Center(child: Text("FRONT", style: TextStyle(fontSize: 30, fontWeight: FontWeight.w300))));
+  var initialMid = Container(width: double.infinity, color: const Color.fromARGB(255, 233, 182, 241), child : const Center(child: Text("MID INITIAL", style: TextStyle(fontSize: 30, fontWeight: FontWeight.w300))));
   var openBottom = Container(width: double.infinity, color: const Color.fromARGB(255, 195, 248, 197), child : const Center(child: Text("BOTTOM", style: TextStyle(fontSize: 30, fontWeight: FontWeight.w300))));
   var bottomBack = Container(width: double.infinity, color: const Color.fromARGB(255, 245, 240, 199), child : const Center(child: Text("BOTTOM BACK", style: TextStyle(fontSize: 30, fontWeight: FontWeight.w300))));
 
@@ -28,7 +30,7 @@ class _TicketTileState extends State<TicketTile> {
     return [
       FoldEntry(height: 140.0, front: openTop),
       FoldEntry(height: 140.0, front: openMid, back: initialMid),
-      FoldEntry(height: 100.0, front: openBottom, back: bottomBack)
+      FoldEntry(height: 140.0, front: openBottom, back: bottomBack)
     ];
   }
 

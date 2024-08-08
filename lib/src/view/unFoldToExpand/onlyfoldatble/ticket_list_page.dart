@@ -3,7 +3,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:rnd/src/view/unFoldToExpand/onlyfoldatble/ticket_tile.dart';
-import 'package:rnd/src/view/unFoldToExpand/ticket.dart';
 
 class TicketListPage extends StatefulWidget {
   const TicketListPage({super.key});
@@ -45,10 +44,10 @@ class _TicketListPageState extends State<TicketListPage> {
     _openTickets.contains(clickedTicket) ? _openTickets.remove(clickedTicket) : _openTickets.add(clickedTicket);
 
     // Calculate heights of the open and closed elements before the clicked item
-    double openTicketsOffset = Ticket.nominalOpenHeight * _getOpenTicketsBefore(clickedTicket);
-    double closedTicketsOffset = Ticket.nominalClosedHeight * (clickedTicket - _getOpenTicketsBefore(clickedTicket));
+    double openTicketsOffset = TicketTile.nominalOpenHeight * _getOpenTicketsBefore(clickedTicket);
+    double closedTicketsOffset = TicketTile.nominalClosedHeight * (clickedTicket - _getOpenTicketsBefore(clickedTicket));
 
-    double offset = openTicketsOffset + closedTicketsOffset - (Ticket.nominalClosedHeight * 1.9);
+    double offset = openTicketsOffset + closedTicketsOffset - (TicketTile.nominalClosedHeight * 1.9);
 
     // Scroll to the clicked element
     _scrollController.animateTo(max(0, offset),
