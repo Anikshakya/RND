@@ -66,10 +66,20 @@ class _BiometricsPageState extends State<BiometricsPage> {
   @override
   void initState() {
     super.initState();
-    canUseBiometric();
+    initialize();
   }
 
+  // Initialize
+  initialize() async{
+    var isUpported = await canUseBiometric();
+    if(isUpported == true){
+      setState(() {
+        canAuthinticate =  true;
+      });
+    }
+  }
 
+  // Check If Biometrics is supported
   canUseBiometric() async {
     final bool canAuthenticateWithBiometrics  = await auth.canCheckBiometrics;
     final bool canAuthenticate = canAuthenticateWithBiometrics || await auth.isDeviceSupported();
@@ -105,12 +115,9 @@ class _BiometricsPageState extends State<BiometricsPage> {
       body: Center(
         child: Column(
           children: [
-            const SizedBox(height: 10),
-            if (canAuthinticate)
-              const Text('This device supports biometrics'),
-            const SizedBox(height: 20),
-            Text('Current State: $_authorizedStatusText'),
-            const SizedBox(height: 50),
+            const SizedBox(height: 40),
+            if (canAuthinticate) const Text('This device supports biometrics'),
+            const SizedBox(height: 40),
             ElevatedButton(
               onPressed: () async{
                 setState(() {
@@ -148,6 +155,8 @@ class _BiometricsPageState extends State<BiometricsPage> {
               },
               child: const Text('Authenticate with PIN'),
             ),
+            const SizedBox(height: 40),
+            Text('Current State: $_authorizedStatusText'),
           ],
         ),
       ),
