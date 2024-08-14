@@ -18,7 +18,7 @@ class ConnectivityService {
       var isConnected = result.isNotEmpty && result[0].rawAddress.isNotEmpty;
       if(isConnected){
         // Close the SnackBar if connected
-        scaffoldMessengerKey.currentState?.hideCurrentSnackBar();
+        scaffoldMessengerKey.currentState?.clearSnackBars();
       } else {
          // Show SnackBar if not connected
         _showSnackBar('You are offline');
@@ -36,7 +36,7 @@ class ConnectivityService {
       action: SnackBarAction(
         label: 'Close',
         onPressed: () {
-          scaffoldMessengerKey.currentState?.hideCurrentSnackBar();
+          scaffoldMessengerKey.currentState?.clearSnackBars();
         },
       ),
     );
