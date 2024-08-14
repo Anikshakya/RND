@@ -5,11 +5,10 @@ class BouncingWidget extends StatefulWidget {
   final Widget child;
   final double maxBounce;
 
-  const BouncingWidget({Key? key, this.isVisible = false, required this.child, this.maxBounce = 20}) : super(key: key);
+  const BouncingWidget({super.key, this.isVisible = false, required this.child, this.maxBounce = 20});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _BouncingWidgetState createState() => _BouncingWidgetState();
+  State<BouncingWidget> createState() => _BouncingWidgetState();
 }
 
 class _BouncingWidgetState extends State<BouncingWidget> {
