@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:rnd/main.dart';
+
+// To Show Snack Bar on Connectivity Change
+final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
 class ConnectivityService {
   // Continous Connectivity Check

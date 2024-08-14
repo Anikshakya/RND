@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rnd/src/services/connectivity_service.dart';
 import 'package:rnd/src/view/home_page.dart';
 
-// To Show Snack Bar on Connectivity Change
-final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
-
 void main() {
   runApp(const MyApp());
 }
@@ -15,9 +12,7 @@ class MyApp extends StatefulWidget {
   @override
   State<MyApp> createState() => _MyAppState();
 }
-
 class _MyAppState extends State<MyApp> {
-  late ConnectivityService connectivityService;
 
   @override
   void initState() {
