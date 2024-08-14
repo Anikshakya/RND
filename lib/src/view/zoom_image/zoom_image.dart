@@ -13,22 +13,24 @@ class ZoomImage extends StatelessWidget {
         itemCount: 10,
         padding: const EdgeInsets.only(top: 10.0),
         itemBuilder: (context, index) {
-          return ZoomOverlay(
-            modalBarrierColor: const Color.fromARGB(15, 0, 0, 0), // optional
-            minScale: 0.5, // optional
-            maxScale: 3.0, // optional
-            twoTouchOnly: true,
-            animationDuration: const Duration(milliseconds: 300),
-            animationCurve: Curves.fastOutSlowIn,
-            onScaleStart: () {
-              debugPrint('zooming!');
-            }, // optional
-            onScaleStop: () {
-              debugPrint('zooming ended!');
-            }, // optional
-            child: Image.network(
-              'https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg'
-            )
+          return GestureDetector(
+            child: ZoomOverlay(
+              modalBarrierColor: const Color.fromARGB(15, 0, 0, 0), // optional
+              minScale: 0.5, // optional
+              maxScale: 3.0, // optional
+              twoTouchOnly: true,
+              animationDuration: const Duration(milliseconds: 300),
+              animationCurve: Curves.fastOutSlowIn,
+              onScaleStart: () {
+                debugPrint('zooming!');
+              }, // optional
+              onScaleStop: () {
+                debugPrint('zooming ended!');
+              }, // optional
+              child: Image.network(
+                'https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg'
+              )
+            ),
           );
         },
       ),
