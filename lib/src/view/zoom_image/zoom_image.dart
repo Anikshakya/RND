@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rnd/src/view/zoom_image/zoom_overlay_widget.dart';
+import 'package:rnd/src/widgets/network_image_widgetd.dart';
 
 class ZoomImage extends StatelessWidget {
   const ZoomImage({super.key});
@@ -27,8 +28,8 @@ class ZoomImage extends StatelessWidget {
               onScaleStop: () {
                 debugPrint('zooming ended!');
               }, // optional
-              child: Image.network(
-                'https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg'
+              child: const BaseImageNetworkWidget(
+                imagePath: 'https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg'
               )
             ),
           );
