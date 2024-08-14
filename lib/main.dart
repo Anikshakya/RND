@@ -1,19 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:rnd/src/services/connectivity_service.dart';
 import 'package:rnd/src/view/home_page.dart';
+
+// To Show Snack Bar on Connectivity Change
+final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late ConnectivityService connectivityService;
+
+  @override
+  void initState() {
+    super.initState();
+    // Check Internet Connectivity
+    ConnectivityService().checkConnectivityPeriodically();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'RND',
       debugShowCheckedModeBanner: false,
+      scaffoldMessengerKey: scaffoldMessengerKey, // Set the global key here
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
