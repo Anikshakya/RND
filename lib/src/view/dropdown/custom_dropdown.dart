@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+enum DropdownAnimation { slideDown, popUp, scale, fade }
+
 class CustomDropdown<T> extends StatefulWidget {
   final List<T> items;
   final T? value;
@@ -15,6 +17,7 @@ class CustomDropdown<T> extends StatefulWidget {
   final double? elevation;
   final double? borderRadius;
   final double? maxHeight;
+  final DropdownAnimation animationType; // New parameter for animation type
 
   const CustomDropdown({
     super.key,
@@ -32,6 +35,7 @@ class CustomDropdown<T> extends StatefulWidget {
     this.elevation,
     this.borderRadius,
     this.maxHeight = 200,
+    this.animationType = DropdownAnimation.slideDown, // Default to slideDown
   });
 
   @override
@@ -47,7 +51,7 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>>
   late AnimationController _animationController;
   late Animation<double> _sizeAnimation;
   late Animation<double> _opacityAnimation;
-  late ScrollController _scrollController; // Add ScrollController
+  late ScrollController _scrollController;
 
   @override
   void initState() {
@@ -69,7 +73,7 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>>
       ),
     );
 
-    _scrollController = ScrollController(); // Initialize ScrollController
+    _scrollController = ScrollController();
   }
 
   void _toggleDropdown() {
@@ -91,60 +95,129 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>>
   }
 
   OverlayEntry _createOverlayEntry() {
-    return OverlayEntry(
-      builder: (context) => Positioned(
-        width: widget.width ?? MediaQuery.of(context).size.width,
-        child: CompositedTransformFollower(
-          link: _layerLink,
-          showWhenUnlinked: false,
-          offset: Offset(0, widget.height ?? 50),
-          child: Material(
-            color: widget.dropdownColor ?? Colors.white,
-            elevation: widget.elevation ?? 2,
-            borderRadius: BorderRadius.circular(widget.borderRadius ?? 8),
-            child: FadeTransition(
-              opacity: _opacityAnimation,
-              child: SizeTransition(
-                sizeFactor: _sizeAnimation,
-                axisAlignment: -1.0,
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                    maxHeight: widget.maxHeight!,
-                  ),
-                  child: Scrollbar(
-                    thumbVisibility: true,
-                    trackVisibility: true,
-                    controller: _scrollController, // Provide ScrollController
-                    child: ListView.builder(
-                      controller: _scrollController, // Provide ScrollController
-                      shrinkWrap: true,
-                      padding: EdgeInsets.zero,
-                      itemCount: widget.items.length,
-                      itemBuilder: (context, index) {
-                        final item = widget.items[index];
-                        return InkWell(
-                          onTap: () {
-                            widget.onChanged?.call(item, index); // Pass index to callback
-                            _toggleDropdown();
-                          },
-                          child: widget.itemBuilder(context, item),
-                        );
-                      },
-                    ),
+    Widget dropdownContent = ConstrainedBox(
+      constraints: BoxConstraints(
+        maxHeight: widget.maxHeight!,
+      ),
+      child: Scrollbar(
+        thumbVisibility: true,
+        trackVisibility: true,
+        controller: _scrollController,
+        child: ListView.builder(
+          controller: _scrollController,
+          shrinkWrap: true,
+          padding: EdgeInsets.zero,
+          itemCount: widget.items.length,
+          itemBuilder: (context, index) {
+            final item = widget.items[index];
+            return InkWell(
+              onTap: () {
+                widget.onChanged?.call(item, index);
+                _toggleDropdown();
+              },
+              child: widget.itemBuilder(context, item),
+            );
+          },
+        ),
+      ),
+    );
+
+    switch (widget.animationType) {
+      case DropdownAnimation.popUp:
+        return OverlayEntry(
+          builder: (context) => Positioned(
+            width: widget.width ?? MediaQuery.of(context).size.width,
+            child: CompositedTransformFollower(
+              link: _layerLink,
+              showWhenUnlinked: false,
+              offset: Offset(0, widget.height ?? 50),
+              child: Material(
+                color: widget.dropdownColor ?? Colors.white,
+                elevation: widget.elevation ?? 2,
+                borderRadius: BorderRadius.circular(widget.borderRadius ?? 8),
+                child: FadeTransition(
+                  opacity: _opacityAnimation,
+                  child: ScaleTransition(
+                    scale: _sizeAnimation,
+                    child: dropdownContent,
                   ),
                 ),
               ),
             ),
           ),
-        ),
-      ),
-    );
+        );
+
+      case DropdownAnimation.scale:
+        return OverlayEntry(
+          builder: (context) => Positioned(
+            width: widget.width ?? MediaQuery.of(context).size.width,
+            child: CompositedTransformFollower(
+              link: _layerLink,
+              showWhenUnlinked: false,
+              offset: Offset(0, widget.height ?? 50),
+              child: Material(
+                color: widget.dropdownColor ?? Colors.white,
+                elevation: widget.elevation ?? 2,
+                borderRadius: BorderRadius.circular(widget.borderRadius ?? 8),
+                child: ScaleTransition(
+                  scale: _sizeAnimation,
+                  child: dropdownContent,
+                ),
+              ),
+            ),
+          ),
+        );
+
+      case DropdownAnimation.fade:
+        return OverlayEntry(
+          builder: (context) => Positioned(
+            width: widget.width ?? MediaQuery.of(context).size.width,
+            child: CompositedTransformFollower(
+              link: _layerLink,
+              showWhenUnlinked: false,
+              offset: Offset(0, widget.height ?? 50),
+              child: Material(
+                color: widget.dropdownColor ?? Colors.white,
+                elevation: widget.elevation ?? 2,
+                borderRadius: BorderRadius.circular(widget.borderRadius ?? 8),
+                child: FadeTransition(
+                  opacity: _opacityAnimation,
+                  child: dropdownContent,
+                ),
+              ),
+            ),
+          ),
+        );
+
+      case DropdownAnimation.slideDown:
+      default:
+        return OverlayEntry(
+          builder: (context) => Positioned(
+            width: widget.width ?? MediaQuery.of(context).size.width,
+            child: CompositedTransformFollower(
+              link: _layerLink,
+              showWhenUnlinked: false,
+              offset: Offset(0, widget.height ?? 50),
+              child: Material(
+                color: widget.dropdownColor ?? Colors.white,
+                elevation: widget.elevation ?? 2,
+                borderRadius: BorderRadius.circular(widget.borderRadius ?? 8),
+                child: SizeTransition(
+                  sizeFactor: _sizeAnimation,
+                  axisAlignment: -1.0,
+                  child: dropdownContent,
+                ),
+              ),
+            ),
+          ),
+        );
+    }
   }
 
   @override
   void dispose() {
     _animationController.dispose();
-    _scrollController.dispose(); // Dispose ScrollController
+    _scrollController.dispose();
     super.dispose();
   }
 

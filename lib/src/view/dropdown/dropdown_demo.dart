@@ -12,6 +12,7 @@ class DropDownDemo extends StatelessWidget {
         child: CustomDropdown<String>(
           items: const ['Item 1', 'Item 2', 'Item 3', 'Item 1', 'Item 2', 'Item 3', 'Item 1', 'Item 2', 'Item 3', 'Item 1', 'Item 2', 'Item 3'],
           value: 'Item 1',
+          animationType: DropdownAnimation.slideDown,
           onChanged: (value, index) async{
             if(index == 2){
               await Future.delayed(
