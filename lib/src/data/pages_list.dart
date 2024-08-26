@@ -1,5 +1,6 @@
 import 'package:rnd/src/view/biometric/biometric_page.dart';
 import 'package:rnd/src/view/completer/completer_example.dart';
+import 'package:rnd/src/view/dropdown/dropdown_demo.dart';
 import 'package:rnd/src/view/foldEffect/fold_list_page.dart';
 import 'package:rnd/src/view/image_zoom/image_zoom.dart';
 import 'package:rnd/src/view/sliderWithEffect/view/dego_slider_demo.dart';
@@ -25,6 +26,10 @@ var pageList = [
   {
     "title" : "Instagram Zoom Effect",
     "page"   : const ZoomImage()
+  },
+  {
+    "title" : "Drop Down",
+    "page"   : const DropDownDemo()
   },
   {
     "title" : "Load Using Completer",
