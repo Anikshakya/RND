@@ -30,6 +30,20 @@ class DropDownDemo extends StatelessWidget {
           ),
           hint: const Text('Select an item'),
           width: 200,
+          child: Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: Colors.blueAccent,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Custom Container'),
+                Icon(Icons.arrow_drop_down, color: Colors.white),
+              ],
+            ),
+          ),
         ),
       ),
     );

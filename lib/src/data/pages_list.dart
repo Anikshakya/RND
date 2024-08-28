@@ -4,6 +4,7 @@ import 'package:rnd/src/view/dropdown/dropdown_demo.dart';
 import 'package:rnd/src/view/foldEffect/fold_list_page.dart';
 import 'package:rnd/src/view/image_zoom/image_zoom.dart';
 import 'package:rnd/src/view/sliderWithEffect/view/dego_slider_demo.dart';
+import 'package:rnd/src/view/swipable_player/swipable_player_demo.dart';
 import 'package:rnd/src/view/zoom_image/zoom_image.dart';
 
 var pageList = [
@@ -34,5 +35,9 @@ var pageList = [
   {
     "title" : "Load Using Completer",
     "page"   : const CompleterLoadPage()
+  },
+  {
+    "title" : "Swipable Video Player",
+    "page"   : const SwipableVideoPlayerDemo()
   },
 ];

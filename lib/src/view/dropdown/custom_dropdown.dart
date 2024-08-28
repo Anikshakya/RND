@@ -18,6 +18,7 @@ class CustomDropdown<T> extends StatefulWidget {
   final double? borderRadius;
   final double? maxHeight;
   final DropdownAnimation animationType; // New parameter for animation type
+  final Widget? child; // New parameter for custom container
 
   const CustomDropdown({
     super.key,
@@ -36,6 +37,7 @@ class CustomDropdown<T> extends StatefulWidget {
     this.borderRadius,
     this.maxHeight = 200,
     this.animationType = DropdownAnimation.slideDown, // Default to slideDown
+    this.child, // Initialize custom container
   });
 
   @override
@@ -227,7 +229,7 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>>
       link: _layerLink,
       child: GestureDetector(
         onTap: _toggleDropdown,
-        child: Container(
+        child: widget.child ?? Container(  // Use custom container if provided
           width: widget.width ?? MediaQuery.of(context).size.width,
           height: widget.height ?? 50,
           decoration: widget.decoration ??
