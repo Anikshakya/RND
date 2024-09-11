@@ -77,6 +77,19 @@ class _ImageZoomFullscreenState extends State<CustomZoomImage>
             widget.imageUrl.toString(),
             height: MediaQuery.of(context).size.height,
             width: double.infinity,
+            loadingBuilder: (BuildContext context, Widget child,
+                ImageChunkEvent? loadingProgress) {
+              if (loadingProgress == null) return child;
+              return Center(
+                child: CircularProgressIndicator(
+                  value: loadingProgress.expectedTotalBytes != null
+                      ? loadingProgress.cumulativeBytesLoaded /
+                          loadingProgress.expectedTotalBytes!
+                      : null,
+                ),
+              );
+            },
+            errorBuilder: (context, url, error) => const Icon(Icons.error),
           ),
         ),
       ),
