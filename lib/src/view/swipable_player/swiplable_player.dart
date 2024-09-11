@@ -181,6 +181,7 @@ class _SwipablePlayerState extends State<SwipablePlayer> with TickerProviderStat
       return Container();
     }
 
+    // ignore: deprecated_member_use
     return WillPopScope(
       onWillPop: () async {
         if (heightNotifier.value > widget.minHeight && !_isFullScreen) {
@@ -306,6 +307,7 @@ class _SwipablePlayerState extends State<SwipablePlayer> with TickerProviderStat
   }
 }
 
+// ignore: constant_identifier_names
 enum PanelState {MAX, MIN, DISMISS }
 
 class MiniplayerController extends ValueNotifier<ControllerData?> {
